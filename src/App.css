@@ -1,38 +1,209 @@
-.App {
-  text-align: center;
+html,body{
+      margin: 0;
+      padding: 0;
+}
+body{
+      background-image: url('./background.jpg');
+}
+header{
+      margin: 0;
+      height: 20vh;
+      border-bottom: 3px solid black ;
+      background-image: url('./header.jpg');
+}
+.beerBox{
+      display: grid;
+      grid-template-columns: 28% 28% 28%;
+      grid-auto-rows: 55vh;
+      grid-column-gap: 20px;
+      justify-content: center;
+     
+}
+.beerCard{
+      border: 3px solid rgb(68, 68, 68);
+      overflow-y:auto;
+      word-break:normal;
+      margin-top: 20px;
+      background-image: url('./card.png');
+      padding: 5px;
+}
+.beerPhotos{
+      height: 20vh;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+}
+.logo-text{
+      margin: 0;
+      font-size: 60px;
+      text-align: center;
+      line-height:20vh;
+}
+.tool-bar{
+      display: flex;
+      border-bottom: 3px solid black;
+      height: 8vh;
+      justify-content: space-around;
+      align-items: center;
+      background-color: rgba(84, 84, 84, 0.517);
+}
+.tool-bar input{
+      width: 35%;
+      height: 30px;
+      border-radius: 50px;
+      font-size: 20px;
+      padding-left: 10px;
+}
+.tool-bar select{
+      height: 35px;
+      width: 15%;
+      border-radius: 50px;
+      font-size: 18px;
+}
+.tool-bar button{
+      border-radius: 50px;
+      width: 20%;
+      height: 35px;
+      font-size: 18px;
+      background-color: rgba(255, 226, 206, 0.66);
+      font-weight: 600;
+}
+.tool-bar button:hover{
+      background-color: rgba(255, 218, 193, 0.966);
+}
+.beer-name{
+      text-align: center;
+}
+.navigation{
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      margin-bottom: 15px;
+}
+.navigation button{
+      font-size: 20px;
+      margin-left: 10px;
+      border-radius: 50px;
+}
+.navigation button:hover{
+      background-color: rgb(255, 238, 181);
+}
+.navigation button:focus{
+      background-color: coral;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+.modal-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 35%;
+      pointer-events: auto;
+      /* background-color: rgb(184, 184, 184); */
+      background-image: url('./form.png');
+      background-clip: padding-box;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: .3rem;
+      outline: 0;
+      height: 440px;
+      margin-top: 10%;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .modal-backdrop.show {
+      opacity: 0.7;
   }
-  to {
-    transform: rotate(360deg);
+  .modal-backdrop.fade {
+      opacity: 0;
   }
-}
+  .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1050;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+  }
+  .fade {
+      transition: opacity .15s linear;
+  }
+  .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1055;
+      display: none;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      outline: 0;
+  }
+  .modal .show .modal-dialog {
+      transform: none;
+  }
+  
+  .modal .fade .modal-dialog {
+      transition: transform .3s ease-out;
+      transform: translateY(-50px);
+  }
+  .modal-dialog {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: auto;
+      margin: .5rem;
+      pointer-events: none;
+  }
+  .modal-header {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid #dee2e6;
+      border-top-left-radius: calc(.3rem - 1px);
+      border-top-right-radius: calc(.3rem - 1px);
+  }
+  .modal-footer {
+      display: flex;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: flex-end;
+      padding: .75rem;
+      border-top: 1px solid #dee2e6;
+      border-bottom-right-radius: calc(.3rem - 1px);
+      border-bottom-left-radius: calc(.3rem - 1px);
+  }
+  .modal-body input{
+      display: block;
+      height: 30px;
+      width: 80%;
+      margin-bottom: 5px;
+      font-size: 20px;
+  }
+  .modal-body label{
+      font-size: 23px;
+      margin-top: 10px;
+  }
+  .modal-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+  }
+  .modal-title.h4{
+        font-size: 20px;
+        font-weight: 600;
+  }
+  .modal-header button{
+        background-color: rgba(191, 191, 191, 0.551);
+        font-weight: 600;
+  }
+  .modal-footer button{
+        background-color: rgba(216, 229, 255, 0.714);
+        height: 30px;
+        margin-left: 5px;
+        font-weight: 600;
+  }
