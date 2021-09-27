@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useCallback, useEffect } from 'react';
 import Beer from './Beer';
-import { Button, ButtonToolbar, Modal } from 'C:/Users/user/Desktop/Andersen React/homework1/node_modules/react-bootstrap';
+import { Button, ButtonToolbar, Modal } from 'C:/Users/user/Desktop/Andersen-React/homework1/node_modules/react-bootstrap';
 const App = () => {
   const [beer,setBeer] = React.useState([]);
   const [show, setShow] = React.useState(false);
