@@ -1,6 +1,7 @@
+import {URL_PHOTO_BOTTLE} from '../constants'
 export default (props) =>(
       <div className='beerCard'>
-            <img  src={props.image_url || 'http://pngimg.com/uploads/bottle/bottle_PNG2931.png'} className='beerPhotos' alt ='photo' />
+            <img  src={props.image_url || URL_PHOTO_BOTTLE} className='beerPhotos' alt ='photo' />
             <h2 className='beer-name'>{props.name}</h2>
             <p>{props.tagline}</p>
             <p><strong>First brewed:</strong> {props.first_brewed}</p>

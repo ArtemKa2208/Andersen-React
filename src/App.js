@@ -1,45 +1,39 @@
 import './App.css';
 import React, { useCallback, useEffect } from 'react';
-import Beer from './Beer';
-import { Button, ButtonToolbar, Modal } from 'C:/Users/user/Desktop/Andersen-React/homework1/node_modules/react-bootstrap';
+import Beer from './components/Beer';
+import Form from './components/Form';
+import ToolBar from './components/ToolBar';
+import Navigation from './components/Navigation';
+import {DEFAULT_PAGE,URL_API} from './constants'
+import sortBy from './utils';
+import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
 const App = () => {
   const [beer,setBeer] = React.useState([]);
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const [beerName,setBeerName] = React.useState();
   const getBeer = async (page =  1, url = '') => {
-    let answer;
+    let response;
     if(url){
-      answer = fetch(url)
+      response = await fetch(url)
     }else{
       console.log('1')
-      answer = fetch(`https://api.punkapi.com/v2/beers?page=${page}&per_page=80`)
+      response = await fetch(URL_API+`?page=${page}&per_page=80`)
     }
-    answer
-    .then(res => res.json())
-    .then(
-      (result) => {
-        setBeer(result);
-      },
-      (err) => {
-        throw err;
-      }
-    )
+    const answer = await response.json();
+    setBeer(answer)
   }
-  const handlerInput = (event) => {
-    // setBeerName(event.target.value);
-    if(event.target.value.trim()){
-      getBeer(1,`https://api.punkapi.com/v2/beers?beer_name=${event.target.value}`)
+  const handlerInput = ({target: {value}}) => {
+    if(value.trim()){
+      getBeer(DEFAULT_PAGE,URL_API+`?beer_name=${value}`)
     }else{
       getBeer();
     }
   }
-  const sortBy = (param) => {
-    console.log(beer[0])
+  const sortBy = ({target: {value}}) => {
     let arrBeer = [...beer];
-    switch(param.target.value){
+    switch(value){
       case 'Name':
         arrBeer.sort((a,b) => a.name > b.name ? 1 : -1);
         setBeer(arrBeer)
@@ -65,46 +59,8 @@ const App = () => {
 
   return (
     <div className='App'>
-      <div className='tool-bar'>
-        <input placeholder='Enter the name of the beer' type='text' onChange = {handlerInput}/>
-      {/* <button onClick = {() => getBeer(1,`https://api.punkapi.com/v2/beers?beer_name=${beerName}`)} >Ok</button> */}
-        <select onChange = {sortBy}>
-          <option disabled selected>Sort by</option>
-          <option>Default</option>
-          <option>Name</option>
-          <option>Abv(increasing)</option>
-          <option>Abv(decay)</option>
-        </select>
-        <>
-        <Button variant="primary" onClick={handleShow}>
-        Registration
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header >
-          <Modal.Title>Registration</Modal.Title>
-          <button onClick={handleClose}>x</button>
-        </Modal.Header>
-        <Modal.Body>
-          <label>Full name</label>
-          <input type="text" />
-          <label>Date of Birth</label>
-          <input type="text" />
-          <label>Password</label>
-          <input type="password" minlength="6"/>
-          <label>Email</label>
-          <input type="email" />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-           Registration
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-      </div>
+      <ToolBar handleShow = {handleShow} handlerInput={handlerInput} sortBy={sortBy}/>
+      <Form handleShow = {handleShow} handleClose = {handleClose} show={show}/>
       <div className = 'beerBox'>
         {beer.map( (elem,index) => {
           return(
@@ -133,21 +89,9 @@ const App = () => {
           )
         })}
       </div>
-      <div className='navigation'>
-        <button onClick = {() => getBeer(1)}>1</button>
-        <button onClick = {() => getBeer(2)}>2</button>
-        <button onClick = {() => getBeer(3)}>3</button>
-        <button onClick = {() => getBeer(4)}>4</button>
-        <button onClick = {() => getBeer(5)}>5</button>
-      </div>
+      <Navigation getBeer = {getBeer}/>
     </div>
   );
 }
-
-// async function GetBeer(){
-//   let response = await 
-//   const beer = await response.json();
-//   return beer;
-// }
 
 export default App;

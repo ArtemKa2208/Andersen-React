@@ -3,13 +3,13 @@ html,body{
       padding: 0;
 }
 body{
-      background-image: url('./background.jpg');
+      background-image: url('./assets/background.jpg');
 }
 header{
       margin: 0;
       height: 20vh;
       border-bottom: 3px solid black ;
-      background-image: url('./header.jpg');
+      background-image: url('./assets/header.jpg');
 }
 .beerBox{
       display: grid;
@@ -24,7 +24,7 @@ header{
       overflow-y:auto;
       word-break:normal;
       margin-top: 20px;
-      background-image: url('./card.png');
+      background-image: url('./assets/card.png');
       padding: 5px;
 }
 .beerPhotos{
@@ -35,9 +35,10 @@ header{
 }
 .logo-text{
       margin: 0;
-      font-size: 60px;
+      font-size: 80px;
       text-align: center;
       line-height:20vh;
+      opacity: 0.8;
 }
 .tool-bar{
       display: flex;
@@ -101,7 +102,7 @@ header{
       width: 35%;
       pointer-events: auto;
       /* background-color: rgb(184, 184, 184); */
-      background-image: url('./form.png');
+      background-image: url('./assets/form.png');
       background-clip: padding-box;
       border: 1px solid rgba(0,0,0,.2);
       border-radius: .3rem;
