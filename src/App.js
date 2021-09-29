@@ -6,6 +6,7 @@ import ToolBar from './components/ToolBar';
 import Navigation from './components/Navigation';
 import { DEFAULT_PAGE, URL_API } from './constants'
 import {sortBy} from './utils';
+import {getBeer} from './services/requestService'
 import { Button, ButtonToolbar, Modal } from 'react-bootstrap';
 const App = () => {
 
@@ -13,32 +14,17 @@ const App = () => {
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let defaultBeer;
-  const getBeer = async (page = 1, url = '') => {
-    let response;
-    if (url) {
-      response = await fetch(url);
-      const answer = await response.json();
-      setBeer(answer)
-    } else {
-      if(!defaultBeer){
-        response = await fetch(URL_API + `?page=${page}&per_page=80`)
-        defaultBeer = await response.json();
-      }
-      setBeer(defaultBeer)
-    }
-    
-  }
+
   const handlerInput = ({ target: { value } }) => {
     if (value.trim()) {
-      getBeer(DEFAULT_PAGE, URL_API + `?beer_name=${value}`)
+      getBeer(setBeer,DEFAULT_PAGE, URL_API + `?beer_name=${value}`)
     } else {
-      getBeer();
+      getBeer(setBeer);
     }
   }
  
   useEffect(() => {
-    getBeer();
+    getBeer(setBeer);
   }, [])
 
   return (
